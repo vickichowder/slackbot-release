@@ -25,18 +25,11 @@ export async function notifyChangelog({
   release,
   repo
 }: ChangelogParameters): Promise<OauthV2AccessResponse> {
-  const introBlock: HeaderBlock = {
-    type: 'header',
-    text: {
-      type: 'plain_text',
-      text: `${repo.repo} changelog ${release.name}`
-    }
-  }
-  const linkBlock: SectionBlock = {
+  const introBlock: SectionBlock = {
     type: 'section',
     text: {
       type: 'mrkdwn',
-      text: `<${release.html_url}>`
+      text: `<${release.html_url}|*${repo.repo} changelog ${release.name}*>`
     }
   }
   const dividerBlock: DividerBlock = {type: 'divider'}
@@ -45,6 +38,6 @@ export async function notifyChangelog({
 
   return await axios.post(slackWebhookUrl, {
     text: `${release.name} has been released in ${repo.owner}/${repo.repo}`,
-    blocks: [introBlock, linkBlock, dividerBlock, ...bodyBlocks]
+    blocks: [introBlock, dividerBlock, ...bodyBlocks]
   })
 }
