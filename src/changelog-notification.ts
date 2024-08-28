@@ -1,4 +1,4 @@
-import type {Block, DividerBlock, HeaderBlock, SectionBlock} from '@slack/types'
+import type {Block, DividerBlock, SectionBlock} from '@slack/types'
 import type {OauthV2AccessResponse} from '@slack/web-api/dist/response'
 import axios from 'axios'
 import {markdownToBlocks} from '@instantish/mack'
@@ -29,7 +29,7 @@ export async function notifyChangelog({
     type: 'section',
     text: {
       type: 'mrkdwn',
-      text: `<${release.html_url}|*${repo.repo} changelog ${release.name}*>`
+      text: `🍾🎉<${release.html_url}|*${repo.repo} changelog ${release.name}*>`
     }
   }
   const dividerBlock: DividerBlock = {type: 'divider'}

@@ -25,24 +25,17 @@ const mack_1 = __nccwpck_require__(4260);
 function notifyChangelog({ slackWebhookUrl, release, repo }) {
     return __awaiter(this, void 0, void 0, function* () {
         const introBlock = {
-            type: 'header',
-            text: {
-                type: 'plain_text',
-                text: `${repo.repo} changelog ${release.name}`
-            }
-        };
-        const linkBlock = {
             type: 'section',
             text: {
                 type: 'mrkdwn',
-                text: `<${release.html_url}>`
+                text: `🍾🎉<${release.html_url}|*${repo.repo} changelog ${release.name}*>`
             }
         };
         const dividerBlock = { type: 'divider' };
         const bodyBlocks = yield (0, mack_1.markdownToBlocks)(release.body);
         return yield axios_1.default.post(slackWebhookUrl, {
             text: `${release.name} has been released in ${repo.owner}/${repo.repo}`,
-            blocks: [introBlock, linkBlock, dividerBlock, ...bodyBlocks]
+            blocks: [introBlock, dividerBlock, ...bodyBlocks]
         });
     });
 }
