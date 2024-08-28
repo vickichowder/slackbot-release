@@ -1,4 +1,4 @@
-import type {Block, DividerBlock, HeaderBlock, SectionBlock} from '@slack/types'
+import type {Block, DividerBlock, SectionBlock} from '@slack/types'
 import type {OauthV2AccessResponse} from '@slack/web-api/dist/response'
 import axios from 'axios'
 import {markdownToBlocks} from '@instantish/mack'
@@ -25,18 +25,11 @@ export async function notifyChangelog({
   release,
   repo
 }: ChangelogParameters): Promise<OauthV2AccessResponse> {
-  const introBlock: HeaderBlock = {
-    type: 'header',
-    text: {
-      type: 'plain_text',
-      text: `🍾🎉${repo.repo} changelog ${release.name}`
-    }
-  }
   const linkBlock: SectionBlock = {
     type: 'section',
     text: {
       type: 'mrkdwn',
-      text: `<${release.html_url}>`
+      text: `🍾🎉<${release.html_url}|*${repo.repo} changelog ${release.name}*>`
     }
   }
   const dividerBlock: DividerBlock = {type: 'divider'}
@@ -45,6 +38,6 @@ export async function notifyChangelog({
 
   return await axios.post(slackWebhookUrl, {
     text: `${release.name} has been released in ${repo.owner}/${repo.repo}`,
-    blocks: [introBlock, linkBlock, dividerBlock, ...bodyBlocks]
+    blocks: [linkBlock, dividerBlock, ...bodyBlocks]
   })
 }

@@ -24,7 +24,7 @@ const axios_1 = __importDefault(__nccwpck_require__(6545));
 const mack_1 = __nccwpck_require__(4260);
 function notifyChangelog({ slackWebhookUrl, release, repo }) {
     return __awaiter(this, void 0, void 0, function* () {
-        const introBlock = {
+        const linkBlock = {
             type: 'section',
             text: {
                 type: 'mrkdwn',
@@ -35,7 +35,7 @@ function notifyChangelog({ slackWebhookUrl, release, repo }) {
         const bodyBlocks = yield (0, mack_1.markdownToBlocks)(release.body);
         return yield axios_1.default.post(slackWebhookUrl, {
             text: `${release.name} has been released in ${repo.owner}/${repo.repo}`,
-            blocks: [introBlock, dividerBlock, ...bodyBlocks]
+            blocks: [linkBlock, dividerBlock, ...bodyBlocks]
         });
     });
 }
