@@ -14,14 +14,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/amendx/slackbot-release.git"
+    "url": "git+https://github.com/vickichowder/slackbot-release.git"
   },
   "keywords": [
     "actions",
     "node",
     "setup"
   ],
-  "author": "amendx",
+  "author": "vickichowder",
   "license": "MIT",
   "dependencies": {
     "@actions/core": "^1.6.0",

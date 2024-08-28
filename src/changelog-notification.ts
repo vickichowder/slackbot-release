@@ -29,7 +29,7 @@ export async function notifyChangelog({
     type: 'header',
     text: {
       type: 'plain_text',
-      text: `🎉 [CHANGELOG]: ${release.name}`
+      text: `${repo.repo} changelog ${release.name}`
     }
   }
   const linkBlock: SectionBlock = {
